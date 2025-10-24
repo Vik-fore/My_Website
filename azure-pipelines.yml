@@ -1,6 +1,13 @@
 trigger:
 - main
 
+# ✅ Глобальные переменные (видны во всех stages)
+variables:
+  acrServiceConnection: 'sc-acr'                     # Имя ACR service connection
+  acrLoginServer: 'mydevopsacr14640.azurecr.io'      # ACR адрес
+  imageRepository: 'mywebsite'                       # Имя Docker-образа
+  tag: '$(Build.BuildId)'                            # Тег для версии контейнера
+
 stages:
 # ====================== CI stage ======================
 - stage: Build
@@ -9,12 +16,6 @@ stages:
   - job: BuildAndPush
     pool:
       vmImage: 'ubuntu-latest'
-
-    variables:
-      acrServiceConnection: 'sc-acr'
-      acrLoginServer: 'mydevopsacr14640.azurecr.io'
-      imageRepository: 'mywebsite'
-      tag: '$(Build.BuildId)'
 
     steps:
     - checkout: self
@@ -50,6 +51,6 @@ stages:
           - task: AzureWebAppContainer@1
             displayName: 'Deploy to Web App'
             inputs:
-              azureSubscription: 'sc-azure'        # <-- Service connection for ARM (Azure)
-              appName: 'myweb123'                  # <-- Имя твоего Web App
+              azureSubscription: 'sc-azure'
+              appName: 'myweb123'
               imageName: 'mydevopsacr14640.azurecr.io/mywebsite:latest'
