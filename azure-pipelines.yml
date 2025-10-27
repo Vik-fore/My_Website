@@ -1,12 +1,12 @@
 trigger:
 - main
 
-# ✅ Глобальные переменные (видны во всех stages)
+# ✅ 
 variables:
-  acrServiceConnection: 'sc-acr'                     # Имя ACR service connection
-  acrLoginServer: 'mydevopsacr14640.azurecr.io'      # ACR адрес
-  imageRepository: 'mywebsite'                       # Имя Docker-образа
-  tag: '$(Build.BuildId)'                            # Тег для версии контейнера
+  acrServiceConnection: 'sc-acr'                     # Name ACR
+  acrLoginServer: 'mydevopsacr14640.azurecr.io'      # ACR 
+  imageRepository: 'mywebsite'                       #  Docker-image
+  tag: '$(Build.BuildId)'                            # tag
 
 stages:
 # ====================== CI stage ======================
